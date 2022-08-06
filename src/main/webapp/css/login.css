@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.form-cont{
+    background: #fffdfd40;
+    border: white;
+    width: 500px;
+    height: 500px;
+    margin: 10% 30%;
+}
