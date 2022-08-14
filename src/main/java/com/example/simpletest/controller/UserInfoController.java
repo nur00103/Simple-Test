@@ -22,7 +22,7 @@ public class UserInfoController  extends HttpServlet {
 
         if (action.equalsIgnoreCase("delete")){
           userDao.deleteUser(id);
-          resp.sendRedirect("/index.jsp");
+
         }else if (action.equalsIgnoreCase("update")){
             String upName=req.getParameter("upName");
             String upSurname=req.getParameter("upSurname");

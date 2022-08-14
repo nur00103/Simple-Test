@@ -9,8 +9,8 @@
     <title>Search </title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script><%@include file="user.js"%></script>
-    <script type="text/javascript" src="user.js"></script>
+    <script><%@include file="../../user.js"%></script>
+    <script type="text/javascript" src="../../user.js"></script>
     <!--Bootstrap import -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -19,22 +19,31 @@
 </head>
 <body>
 <%
+//    HttpSession session1 = request.getSession(false);
+//    User u  = (User)session1.getAttribute("user");
+//    if(u==null)
+//        response.sendRedirect(request.getContextPath() + "/auth?action=login");
+
     List<User> list=(List<User>) request.getAttribute("list");
     System.out.println(list);
 %>
 <div>
     <div class="container">
-        <div >
-            <div  >
+        <div style="display: flex">
+            <div >
                 <form action="user" method="POST">
-                    <div class="form-group">
+                    <div class="form-group m-3">
                         <label>Username:</label>
                         <input placeholder="Enter username" class="form-search" type="text" name="username" value=""/>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
+            <form style="margin: 18px">
+                <span class="form-group m-3" style="padding-left: 600px">
+                <a name="logout" href="<%=request.getContextPath()%>/auth?action=logout" class="btn btn-secondary">Log out</a>
+                </span>
+            </form>
         </div>
 
         <div >
@@ -127,17 +136,19 @@
                     <input name="upUsername" type="text" value="" class="form-control" id="upUsername"placeholder="Enter username">
                     <br>
                     <label for="upPassword">Password</label>
-                    <input name="upPassword" type="text" valu e="" class="form-control" id="upPassword"placeholder="Enter password">
+                    <input name="upPassword" type="text" value="" class="form-control" id="upPassword"placeholder="Enter password">
+
                         <div class="modal-footer">
+
                                 <input type="hidden" name="id" value="" id="idUpdate"/>
                                 <input type="hidden" name="action" value="update"/>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <input  type="submit" class="btn btn-primary" value="Update"/>
                         </div>
                     </form>
-                </div>
-
             </div>
+
+        </div>
         </div>
     </div>
 </div>

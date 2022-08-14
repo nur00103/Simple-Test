@@ -27,7 +27,7 @@ public class UserController extends HttpServlet {
            List<User> list=userDao.getUserByUsername(username);
            if (list!=null) {
                req.setAttribute("list", list);
-               req.getRequestDispatcher("/index.jsp").forward(req, resp);
+               req.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(req, resp);
            }else {
                String error="Data is not valid";
                req.setAttribute("error",error);
@@ -41,6 +41,6 @@ public class UserController extends HttpServlet {
         UserDao userDao = new UserDaoImpl();
         List<User> list = userDao.getUserByUsername(null);
         req.setAttribute("list", list);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(req, resp);
     }
 }

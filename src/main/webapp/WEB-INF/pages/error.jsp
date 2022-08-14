@@ -31,7 +31,7 @@
 				<h1>404</h1>
 				<h2>Page not found</h2>
 			</div>
-			<a href="/login.jsp">Login</a>
+			<a href="/WEB-INF/pages/login.jspages/login.jsp">Login</a>
 		</div>
 	</div>
 

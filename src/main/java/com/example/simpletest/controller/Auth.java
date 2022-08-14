@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
 @WebServlet(name = "auth",value = "/auth")
 public class Auth extends HttpServlet {
     @Override
@@ -20,19 +19,21 @@ public class Auth extends HttpServlet {
     String action=req.getParameter("action");
     if (action!=null){
         if (action.equalsIgnoreCase("login")){
-            req.getRequestDispatcher("/login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req,resp);
 
         }else if (action.equalsIgnoreCase("register")){
-            req.getRequestDispatcher("/register.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req,resp);
 
-        } else if (action.equalsIgnoreCase("logout")) {
-            req.getRequestDispatcher("/login.jsp").forward(req,resp);
+        }else if (action.equalsIgnoreCase("logout")) {
+            HttpSession session=req.getSession(false);
+            session.removeAttribute("user");
+            resp.sendRedirect(req.getContextPath()+"/auth?action=login");
 
-        }else{
-            req.getRequestDispatcher("/error.jsp").forward(req,resp);
+        } else{
+            req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req,resp);
         }
     }else {
-            req.getRequestDispatcher("/error.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req,resp);
     }
     }
 
@@ -48,7 +49,7 @@ public class Auth extends HttpServlet {
                 if(user==null){
                     String error="Username or password is incorrect";
                     req.setAttribute("error",error);
-                    req.getRequestDispatcher("/login.jsp").forward(req,resp);
+                    req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req,resp);
                 }else {
                     HttpSession session= req.getSession(true);
                     session.setAttribute("user",user);
@@ -68,13 +69,19 @@ public class Auth extends HttpServlet {
                 }else {
                     String error="Data is not valid";
                     req.setAttribute("error",error);
-                    req.getRequestDispatcher("/register.jsp").forward(req,resp);
+                    req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req,resp);
                 }
-            }else {
-                    req.getRequestDispatcher("/error.jsp").forward(req,resp);
+            }else if (action.equalsIgnoreCase("logout")) {
+                HttpSession session=req.getSession(false);
+                session.removeAttribute("user");
+                req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req,resp);
+
+            }
+            else {
+                    req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req,resp);
             }
         }else {
-             req.getRequestDispatcher("/error.jsp").forward(req,resp);
+             req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req,resp);
         }
     }
 }
